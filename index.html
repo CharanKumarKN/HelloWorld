@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile</title>
+    <title>Software Engineer Profile</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -24,40 +24,50 @@
             height: 200px;
             border-radius: 50%;
             margin: 0 auto 20px;
-			background-image: url('SE.jpeg');
-			background-size: cover;
-    background-position: center;
+            background-image: url('SE.jpeg'); /* Default placeholder image */
+            background-size: cover;
+            background-position: center;
         }
         .description {
             text-align: center;
         }
-
-
-		/* Media Queries for Responsive Design */
-		@media (max-width: 768px) {
-			.container {
-				max-width: 90%;
-			}
-		}
-
-		@media (max-width: 576px) {
-			.profile-photo {
-				width: 150px;
-				height: 150px;
-			}
-		}
-
+        #photo-input {
+            display: none; /* Hide the file input */
+        }
+        #upload-button {
+            display: block;
+            margin: 0 auto;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="profile-photo"></div>
+        <label for="photo-input" id="upload-button">Upload Photo</label>
+        <input type="file" id="photo-input" accept="image/*" onchange="previewPhoto(event)">
+        <div class="profile-photo" id="profile-photo"></div>
         <div class="description">
-			<h1>John Smith</h1>
+            <h1>John Smith</h1>
             <p>Software Engineer</p>
             <p>Experienced software engineer with expertise in full-stack development, specializing in web applications. Proficient in various programming languages and frameworks, including JavaScript, Python, React, and Django. Strong problem-solving skills and a passion for creating efficient, scalable software solutions.</p>
-        
         </div>
     </div>
+
+    <script>
+        function previewPhoto(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const profilePhoto = document.getElementById('profile-photo');
+                profilePhoto.style.backgroundImage = `url('${e.target.result}')`;
+            }
+            reader.readAsDataURL(file);
+        }
+    </script>
 </body>
 </html>
